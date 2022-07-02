@@ -1,5 +1,6 @@
 import express from "express";
 import crypto from "crypto";
+import { generateMockedAuthentication } from "./utils";
 
 const app = express();
 
@@ -18,6 +19,10 @@ app.get("/connect/authorize", (req, res) => {
 });
 
 // TODO: Retornar objeto de sucesso ao adicionar cartão da Ticket
+app.post('/connect/token', (req, res) => {
+  console.log('generating token......')
+  res.json(generateMockedAuthentication())
+})
 
 // app.post()
 
