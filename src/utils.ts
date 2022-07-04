@@ -7,10 +7,12 @@ export const generateMockedAuthentication = () => {
         username: faker.internet.email()
     }
     const id_token = jwt.sign(token, jwtSecret)
+    const date = new Date()
+    date.setDate(date.getDate()+31)
     return {
         id_token,
         access_token: faker.random.alphaNumeric(40).toUpperCase(),
         refresh_token: faker.random.alphaNumeric(40).toUpperCase(),
-        expiration: new Date().toISOString(),
+        expiration: date.toISOString(),
     }
 }
