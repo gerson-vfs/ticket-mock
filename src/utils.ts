@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken')
-const { faker } = require('@faker-js/faker')
+import jwt from 'jsonwebtoken'
+import { faker } from '@faker-js/faker'
 const jwtSecret = 'aaw1vmv0e93no3F8jw1d10C'
 
 const generateToken = () => faker.random.alphaNumeric(40).toUpperCase()
