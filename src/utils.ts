@@ -5,7 +5,6 @@ const jwtSecret = 'aaw1vmv0e93no3F8jw1d10C'
 const generateToken = () => faker.random.alphaNumeric(40).toUpperCase()
 
 export const generateMockedAuthentication = () => {
-    console.log('generating token')
     const token = {
         username: faker.internet.email()
     }
@@ -28,6 +27,22 @@ export const generateTransactResponse = (amount: number) => {
         authorization_id: generateToken(), 
         capture_id: generateToken(), 
         captured_amount: amount,
+        status: 'Transacted'
+      }
+      const token = generateToken()
+
+      const error = null
+      return {meta, data, token, error}
+}
+
+
+export const generateRefundResponse = (amount: number) => {
+    const meta = {
+        status: 'succeeded',
+      }
+      const data = {
+        refund_id: generateToken(), 
+        refunded_amount: amount,
         status: 'Transacted'
       }
       const token = generateToken()

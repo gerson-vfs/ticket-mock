@@ -1,6 +1,6 @@
 import express from "express";
 import crypto from "crypto";
-import { generateMockedAuthentication, generateTransactResponse } from "./utils";
+import { generateMockedAuthentication, generateRefundResponse, generateTransactResponse } from "./utils";
 
 const app = express();
 app.use(express.json())
@@ -19,6 +19,10 @@ app.get("/connect/authorize", (req, res) => {
 });
 
 // TODO: Retornar objeto de sucesso ao adicionar cartão da Ticket
+app.post('/transactions/:authorizationId/actions/refund', (req, res) => {
+  console.log('refunding...')
+  res.json(generateRefundResponse(req.body.amount))
+})
 
 app.post('/transactions', (req, res) => {
   console.log('transacting')
@@ -34,7 +38,7 @@ app.get('/connect/endsession', (_req, res) => {
 
 // ROTA DE CONEXÃO TICKET
 app.post('/connect/token', (req, res) => {
-  console.log('generating token......')
+  console.log('Connecting Token......')
   res.json(generateMockedAuthentication())
 })
 
