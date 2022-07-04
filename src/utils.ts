@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-
+const { faker } = require('@faker-js/faker')
 const jwtSecret = 'aaw1vmv0e93no3F8jw1d10C'
 export const generateMockedAuthentication = () => {
     console.log('generating token')
@@ -9,9 +9,8 @@ export const generateMockedAuthentication = () => {
     const id_token = jwt.sign(token, jwtSecret)
     return {
         id_token,
-        access_token: 'any_id',
-        refresh_token: 'any_id',
-        username: 'any_id',
+        access_token: faker.random.alphaNumeric(40).toUpperCase(),
+        refresh_token: faker.random.alphaNumeric(40).toUpperCase(),
         expiration: new Date().toISOString(),
     }
 }

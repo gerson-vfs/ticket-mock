@@ -19,6 +19,12 @@ app.get("/connect/authorize", (req, res) => {
 });
 
 // TODO: Retornar objeto de sucesso ao adicionar cartão da Ticket
+app.get('/connect/endsession', (_req, res) => {
+  console.log('ending session')
+  res.sendStatus(200)
+})
+
+// ROTA DE CONEXÃO TICKET
 app.post('/connect/token', (req, res) => {
   console.log('generating token......')
   res.json(generateMockedAuthentication())
