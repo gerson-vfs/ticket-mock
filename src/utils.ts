@@ -20,8 +20,10 @@ export const generateMockedAuthentication = () => {
 }
 
 export const generateTransactResponse = (amount: number) => {
+    const shouldSucceed = isEven(amount)
     const meta = {
-        status: 'succeeded',
+        status: shouldSucceed ? 'succeeded' : 'Failed',
+        messages: [{code: 'ERROR_MESSAGE'}]
       }
       const data = {
         authorization_id: generateToken(), 
@@ -31,8 +33,10 @@ export const generateTransactResponse = (amount: number) => {
       }
       const token = generateToken()
 
-      const error = null
-      return {meta, data, token, error}
+      const error = {
+          status: 400
+      }
+      return {response: {meta, data, token, error}, status: shouldSucceed ? 200 : 400}
 }
 
 
@@ -50,3 +54,5 @@ export const generateRefundResponse = (amount: number) => {
       const error = null
       return {meta, data, token, error}
 }
+
+export const isEven = (amount: number) => amount % 2 == 0

@@ -26,8 +26,9 @@ app.post('/transactions/:authorizationId/actions/refund', (req, res) => {
 
 app.post('/transactions', (req, res) => {
   console.log('transacting')
-
-  res.json(generateTransactResponse(req.body.amount))
+  
+  const {response, status} = generateTransactResponse(req.body.amount)
+  res.status(status).json(response)
 })
 
 // TODO: Rota de refund
