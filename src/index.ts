@@ -19,6 +19,8 @@ app.get("/connect/authorize", (req, res) => {
 });
 
 // TODO: Retornar objeto de sucesso ao adicionar cartão da Ticket
+// TODO: Rota de transacionar
+// TODO: Rota de refund
 app.get('/connect/endsession', (_req, res) => {
   console.log('ending session')
   res.sendStatus(200)
