@@ -1,9 +1,9 @@
 import express from "express";
 import crypto from "crypto";
-import { generateMockedAuthentication } from "./utils";
+import { generateMockedAuthentication, generateTransactResponse } from "./utils";
 
 const app = express();
-
+app.use(express.json())
 app.get("/connect/authorize", (req, res) => {
   const { redirect_uri, state } = req.query as {
     [key: string]: string;
@@ -19,11 +19,17 @@ app.get("/connect/authorize", (req, res) => {
 });
 
 // TODO: Retornar objeto de sucesso ao adicionar cartão da Ticket
-// TODO: Rota de transacionar
+
+app.post('/transactions', (req, res) => {
+  console.log('transacting')
+
+  res.json(generateTransactResponse(req.body.amount))
+})
+
 // TODO: Rota de refund
 app.get('/connect/endsession', (_req, res) => {
   console.log('ending session')
-  res.sendStatus(200)
+  return res.sendStatus(200)
 })
 
 // ROTA DE CONEXÃO TICKET
